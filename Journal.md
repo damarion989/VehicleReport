@@ -1,31 +1,37 @@
 # Process Journal
 
-Implementation and verification notes below were recorded by the AI assistant. Add your own reflections before submitting; these notes do not describe your personal experience.
+AI helped write and test this project and explain the code. I am still learning these ideas, especially abstract classes, final methods, and hooks. The testing notes below describe the checks the AI assistant ran.
 
-## Phase 1
-Implemented an abstract VehicleReport with a final generateReport method, shared collection/logging, and abstract formatting.
-Verification: compiled the base class and a temporary subclass outside the repository. Output was collection, temporary formatting, logging, in that order.
-Reflection: In your own words, how does the base class control when subclass methods run (the Hollywood Principle)? What challenges did you encounter?
+## Phase 1: The basic plan
 
-Your reflection: [Write here.]
+VehicleReport holds the steps that every report follows: get the GPS data, format the report, and log that it is finished. Putting the shared steps in one place avoids writing the same code twice.
 
-## Phase 2
-Added TruckReport and BikeReport, each overriding formatReport, plus a Main runner using VehicleReport references.
-Verification: compiled all source files and ran Main. Both reports printed collection, their own formatting, then logging.
-Reflection: Which class drove execution? What felt intuitive or tricky about abstract inheritance?
+The explanation I am working through is that abstract means VehicleReport is not a complete report by itself. The truck and bike classes must provide the formatting. The final keyword stops them from replacing generateReport and changing its step order.
 
-Your reflection: [Write here.]
+The Hollywood Principle means the parent method decides when to call the subclass's formatting method. I still need help following how that call reaches the subclass.
 
-## Phase 3
-Added a default false maintenance hook, a shared maintenance step, and a TruckReport override returning true. The template evaluates the hook immediately after formatting.
-Verification: compiled and ran Main. Truck maintenance appeared between formatting and logging. BikeReport skipped maintenance without an override.
-Reflection: How does a hook with a default differ from an abstract method that subclasses must implement? How did seeing the output affect your understanding?
+Testing note: The assistant compiled VehicleReport with a temporary example class and ran it. The steps printed in the right order.
 
-Your reflection: [Write here.]
+## Phase 2: Truck and bike reports
 
-## Phase 4
-Final verification: compiled all four source files and ran Main again. Inspected the output: truck collection -> heavy cargo formatting -> maintenance -> logging; bike collection -> parcel formatting -> logging. No errors occurred in the final compilation or run.
-AI review: the assistant checked that generateReport is final, formatting is abstract, the hook defaults to false, and only TruckReport opts in. The beginner implementation matches the required pattern. Collection and logging intentionally remain dummy console messages, as allowed by the assignment.
-Reflection: What issues or misunderstandings did YOU find when running it? What did you learn from the AI feedback above?
+TruckReport formats heavy cargo information. BikeReport formats small parcel information. Both use the GPS and logging code from VehicleReport. Main creates the two reports and starts them.
 
-Your reflection: [Write here.]
+VehicleReport still controls the order, even when the object is a truck or bike report. I am still confused about inheritance and how a VehicleReport variable can refer to a TruckReport or BikeReport object. Could we walk through one call to generateReport line by line?
+
+Testing note: The assistant compiled and ran both reports. Each printed GPS collection, its own formatting message, and then the log message.
+
+## Phase 3: The optional maintenance check
+
+The maintenance hook is a yes-or-no method. It normally returns false, so maintenance is skipped. TruckReport returns true instead, so the truck gets the check. BikeReport keeps the default answer.
+
+An abstract method has no default code, so a concrete subclass has to fill it in. A hook already has a default answer, so a subclass can leave it alone. I still need practice understanding how overriding a method changes which code runs.
+
+Testing note: The assistant ran the program. The truck's maintenance message appeared after formatting and before logging. The bike had no maintenance message.
+
+## Phase 4: Checking the result
+
+The assistant's final run had no compile or runtime errors. The truck printed GPS collection, heavy cargo formatting, maintenance, and logging. The bike printed GPS collection, parcel formatting, and logging.
+
+The AI feedback explained that the parent keeps the main plan while the child classes change certain parts. That is the main idea I am trying to understand. I still need help with abstract, final, inheritance, and hooks, and with telling what each one does when reading the code.
+
+My next step is to run Main myself and follow the output beside the methods. I want to be able to explain why the truck checks maintenance and the bike does not.
