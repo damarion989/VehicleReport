@@ -15,3 +15,10 @@ Verification: compiled all source files and ran Main. Both reports printed colle
 Reflection: Which class drove execution? What felt intuitive or tricky about abstract inheritance?
 
 Your reflection: [Write here.]
+
+## Phase 3
+Added a default false maintenance hook, a shared maintenance step, and a TruckReport override returning true. The template evaluates the hook immediately after formatting.
+Verification: compiled and ran Main. Truck maintenance appeared between formatting and logging. BikeReport skipped maintenance without an override.
+Reflection: How does a hook with a default differ from an abstract method that subclasses must implement? How did seeing the output affect your understanding?
+
+Your reflection: [Write here.]
