@@ -22,3 +22,10 @@ Verification: compiled and ran Main. Truck maintenance appeared between formatti
 Reflection: How does a hook with a default differ from an abstract method that subclasses must implement? How did seeing the output affect your understanding?
 
 Your reflection: [Write here.]
+
+## Phase 4
+Final verification: compiled all four source files and ran Main again. Inspected the output: truck collection -> heavy cargo formatting -> maintenance -> logging; bike collection -> parcel formatting -> logging. No errors occurred in the final compilation or run.
+AI review: the assistant checked that generateReport is final, formatting is abstract, the hook defaults to false, and only TruckReport opts in. The beginner implementation matches the required pattern. Collection and logging intentionally remain dummy console messages, as allowed by the assignment.
+Reflection: What issues or misunderstandings did YOU find when running it? What did you learn from the AI feedback above?
+
+Your reflection: [Write here.]
